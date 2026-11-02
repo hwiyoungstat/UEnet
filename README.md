@@ -126,26 +126,25 @@ For the usual elastic net interpretation, select `0 <= alpha <= 1` and `lambda >
 
 ## Optimization formulation
 
-Let \(L = \{i : y_i < \bar y\}\) and \(U = \{i : y_i > \bar y\}\), with sizes \(n_L\) and \(n_U\). Write \(X_L\) and \(X_U\) for the associated rows of \(X\), and \(\bar y_L, \bar y_U\) for the corresponding response means.
+Let $L = \{i : y_i < \bar{y}\}$ and $U = \{i : y_i > \bar{y}\}$ denote the sets of observations below and above the overall response mean, with sizes $n_L$ and $n_U$. Let $X_L$ and $X_U$ denote the corresponding rows of $X$, and let $\bar{y}_L$ and $\bar{y}_U$ be the respective group means of the response.
 
-The implemented optimization problem is
+The implemented U-ENet optimization problem is
 
 $$
 \begin{aligned}
 \min_{\beta,\gamma}\quad &
 \frac{1}{2n}\lVert Y-X\beta\rVert_2^2
-+ \lambda\left(
++\lambda\left(
 \alpha\lVert\gamma_{-1}\rVert_1
 +\frac{1-\alpha}{2}\lVert\gamma_{-1}\rVert_2^2
 \right) \\
-\text{subject to}\quad
-&\beta=\gamma, \\
-&\frac{1}{n_L}\mathbf{1}^{\top}X_L\beta=\bar{y}_L, \\
-&\frac{1}{n_U}\mathbf{1}^{\top}X_U\beta=\bar{y}_U.
+\text{subject to}\quad & \beta=\gamma, \\
+& \frac{1}{n_L}\mathbf{1}^{\top}X_L\beta=\bar{y}_L, \\
+& \frac{1}{n_U}\mathbf{1}^{\top}X_U\beta=\bar{y}_U.
 \end{aligned}
 $$
 
-Here, \(\gamma_{-1}\) excludes the first (intercept) coefficient from regularization. The two mean constraints anchor the lower- and upper-response groups separately.
+Here, $\gamma_{-1}$ excludes the first (intercept) coefficient from regularization. The two mean constraints anchor the lower- and upper-response groups separately.
 
 Observations exactly equal to the overall mean response remain part of the regression fit but do not belong to either anchoring group.
 

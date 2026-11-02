@@ -130,17 +130,20 @@ Let \(L = \{i : y_i < \bar y\}\) and \(U = \{i : y_i > \bar y\}\), with sizes \(
 
 The implemented optimization problem is
 
-$$
+```math
 \begin{aligned}
-\min_{\beta,\gamma}\quad &
-\frac{1}{2n}\lVert Y-X\beta\rVert_2^2
-+ \lambda\left(\alpha\lVert\gamma_{-1}\rVert_1
-+\frac{1-\alpha}{2}\lVert\gamma_{-1}\rVert_2^2\right) \\
-\text{subject to}\quad &\beta=\gamma, \\
-&\frac{1}{n_L}\mathbf{1}^{\top}X_L\beta=\bar y_L, \\
-&\frac{1}{n_U}\mathbf{1}^{\top}X_U\beta=\bar y_U.
+\min_{\beta,\gamma} \quad &
+\frac{1}{2n}\|Y-X\beta\|_2^2
++\lambda\left[
+\alpha\|\gamma_{-1}\|_1
++\frac{1-\alpha}{2}\|\gamma_{-1}\|_2^2
+\right] \\
+\text{subject to} \quad
+& \beta=\gamma, \\
+& \frac{1}{n_L}\mathbf{1}^{\top}X_L\beta=\bar{y}_L, \\
+& \frac{1}{n_U}\mathbf{1}^{\top}X_U\beta=\bar{y}_U.
 \end{aligned}
-$$
+```
 
 Here, \(\gamma_{-1}\) excludes the first (intercept) coefficient from regularization. The two mean constraints anchor the lower- and upper-response groups separately.
 
